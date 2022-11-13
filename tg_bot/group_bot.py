@@ -19,7 +19,7 @@ group_name = ""
 def start(update: Update, context: CallbackContext):
     context.bot.send_message(chat_id=update.effective_chat.id,
                              text="Я бот расписания для группы " + group_name + ", вызови /help чтобы узнать список команд.\n"
-                                  "PR: ",
+                                  "PR: https://github.com/ikuchmin/pvgus_rasp_bot",
                              parse_mode=telegram.ParseMode.MARKDOWN)
 
 

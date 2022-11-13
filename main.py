@@ -31,7 +31,7 @@ out = datetime.strptime(s, f).date()
 print(out)
 # lessons = discipline.next(group_name, discipline_name)
 
-lessons = group.now(group_name, curr_datetime=datetime(2022, 11, 28, 19, 20, 00))
+lessons = group.now(group_name)
 print(formatting.grouped_by_date(lessons))
 
 

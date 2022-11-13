@@ -21,7 +21,7 @@ def start(update: Update, context: CallbackContext):
     context.bot.send_message(chat_id=update.effective_chat.id,
                              text="Я бот расписания для группы " + group_name +
                                   ", вызови /help чтобы узнать список команд.\n"
-                                  "PR: ",
+                                  "PR: https://github.com/ikuchmin/pvgus_rasp_bot",
                              parse_mode=telegram.ParseMode.MARKDOWN)
 
 
@@ -35,7 +35,7 @@ def now(update: Update, context: CallbackContext):
 def next(update: Update, context: CallbackContext):
     lessons = rasp_discipline.next(group_name, discipline_name, curr_date=curr_datetime.date())
     context.bot.send_message(chat_id=update.effective_chat.id,
-                             text=rasp_f.without_date(lessons),
+                             text=rasp_f.grouped_by_date(lessons),
                              parse_mode=telegram.ParseMode.MARKDOWN)
 
 

@@ -51,6 +51,10 @@ def load_lessons(student_group, fromDate, toDate):
 
     lessons = []
     for g in grouped_by_date[1:]:
+
+        if (g[0].text == 'По данному запросу ничего не найдено!'):
+            return []
+
         date = datetime.strptime(g[0].text, pvgus_rasp_date_format).date()
         for cl in divide_chunks(g[1:], 7):
             lessons.append(Lesson(date, cl[0].text, lesson_places[cl[1].text],
