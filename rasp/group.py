@@ -20,18 +20,35 @@ def tomorrow(student_group_name, curr_date=date.today()):
     return load_lessons_by_group_name(student_group_name, tomorrow, tomorrow)
 
 
-def week(student_group_name, curr_date=date.today()):
+def week(student_group_name, curr_date=date.today(), only_future=True):
     start_week = curr_date - timedelta(days=curr_date.weekday())
     end_week = start_week + timedelta(days=6)
-    return load_lessons_by_group_name(student_group_name, start_week, end_week)
+    lessons =  load_lessons_by_group_name(student_group_name, start_week, end_week)
+
+    if only_future:
+        lessons = [l for l in lessons if curr_date <= l.date]
+
+    return lessons
 
 
-def month(student_group_name, curr_date=date.today()):
+def month(student_group_name, curr_date=date.today(), only_future=True):
     start_month = curr_date.replace(day=1)
     end_month = start_month + timedelta(days=31)
-    return load_lessons_by_group_name(student_group_name, start_month, end_month)
+    lessons =  load_lessons_by_group_name(student_group_name, start_month, end_month)
 
-def two_month(student_group_name, curr_date=date.today()):
+    if only_future:
+        lessons = [l for l in lessons if curr_date <= l.date]
+
+    return lessons
+
+
+def two_month(student_group_name, curr_date=date.today(), only_future=True):
     start_month = curr_date.replace(day=1)
     end_month = start_month + timedelta(days=62)
-    return load_lessons_by_group_name(student_group_name, start_month, end_month)
+    lessons = load_lessons_by_group_name(student_group_name, start_month, end_month)
+
+    if only_future:
+        lessons = [l for l in lessons if curr_date <= l.date]
+
+    return lessons
+

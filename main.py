@@ -30,9 +30,19 @@ f = "%d.%m.%Y"
 out = datetime.strptime(s, f).date()
 print(out)
 # lessons = discipline.next(group_name, discipline_name)
-
-lessons = group.now(group_name)
-print(formatting.grouped_by_date(lessons))
+github_repo = "http://"
+print('/now - занятие сейчас\n'
+      '/today - рассписание на сегодня\n'
+      '/tomorrow - расписание на завтра\n'
+      '/week - расписание на текущую неделю\n'
+      '/month - расписание на текущий месяц\n'
+      '/two_month - расписание на текущий месяц\n'
+      '/week_all - расписание на текущую неделю (включая прошедшие)\n'
+      '/month_all - расписание на текущий месяц (включая прошедшие)\n'
+      '/two_month_all - расписание на текущий месяц\n\n'
+      "PR: [GitHub Repo](" + github_repo + ")")
+# lessons = group.month(group_name)
+# print(formatting.grouped_by_date(lessons))
 
 
 

@@ -9,6 +9,7 @@ from telegram import Update, Bot
 from telegram.ext import CallbackContext, CommandHandler
 from telegram.ext import Dispatcher
 
+from common.github import github_repo
 from rasp import formatting as rasp_f
 from rasp import discipline as rasp_discipline
 from tg_bot.token import tg_tokens
@@ -21,7 +22,7 @@ def start(update: Update, context: CallbackContext):
     context.bot.send_message(chat_id=update.effective_chat.id,
                              text="Я бот расписания для группы " + group_name +
                                   ", вызови /help чтобы узнать список команд.\n"
-                                  "PR: https://github.com/ikuchmin/pvgus_rasp_bot",
+                                  "PR: " + github_repo,
                              parse_mode=telegram.ParseMode.MARKDOWN)
 
 
@@ -77,8 +78,8 @@ def help(update: Update, context: CallbackContext):
                                   '/today - рассписание на сегодня\n'
                                   '/tomorrow - расписание на завтра\n'
                                   '/week - расписание на текущую неделю\n'
-                                  '/month - расписание на текущий месяц',
-                             parse_mode=telegram.ParseMode.MARKDOWN)
+                                  '/month - расписание на текущий месяц\n\n'
+                                  "PR: " + github_repo)
 
 
 def handler(event, context):

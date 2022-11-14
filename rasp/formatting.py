@@ -13,16 +13,16 @@ def grouped_by_date(lessons):
 
     message = ""
     for (d, ls) in lessons_by_date:
-        message += '**' + d.strftime("%d.%m.%Y") + '**\n' + '\n'.join(__lesson_without_date(l) for l in ls) + '\n\n'
+        message += '*' + d.strftime("%d.%m.%Y") + '*\n' + '\n'.join(__lesson_without_date(l) for l in ls) + '\n\n'
 
     return message or empty_lessons
 
 
 def __lesson_without_date(l):
     if isinstance(l.name, Discipline):
-        return "|".join([__lesson_place(l.classNumber), f'[{l.auditorium}]({l.name.blu_button_link})', l.type, f'[{l.name.name}]({l.name.sdo_link})', l.teacher])
+        return " | ".join([__lesson_place(l.classNumber), f'[{l.auditorium}]({l.name.blu_button_link})', l.type, f'[{l.name.name}]({l.name.sdo_link})', l.teacher])
 
-    return "|".join([__lesson_place(l.classNumber), l.auditorium, l.type, str(l.name), l.teacher])
+    return " | ".join([__lesson_place(l.classNumber), l.auditorium, l.type, str(l.name), l.teacher])
 
 
 
@@ -30,5 +30,4 @@ def __lesson_place(lp):
     def format_time(t):
         return t.strftime("%H:%M")
 
-    return f'{format_time(lp.firstStartTime)}-{format_time(lp.firstEndTime)},' \
-           f'{format_time(lp.secondStartTime)}-{format_time(lp.secondEndTime)}'
+    return f'`{lp.number}-я пара` | `{format_time(lp.firstStartTime)}-{format_time(lp.secondEndTime)}`'
