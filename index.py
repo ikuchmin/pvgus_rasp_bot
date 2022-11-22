@@ -1,5 +1,7 @@
+import locale
 from tg_bot import discipline_bot, group_bot
 
+locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8')
 
 def handler(event, context):
     print(event)

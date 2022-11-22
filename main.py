@@ -1,9 +1,13 @@
+import locale
+
 from datetime import datetime
 
 import pytz
 from pytz import timezone
 
 from rasp import formatting, group
+
+locale.setlocale(locale.LC_TIME, 'ru_RU.UTF-8')
 
 group_name='БОЗИоз22'
 discipline_name = 'Алгоритмизация и программирование'
@@ -41,8 +45,8 @@ print('/now - занятие сейчас\n'
       '/month_all - расписание на текущий месяц (включая прошедшие)\n'
       '/two_month_all - расписание на текущий месяц\n\n'
       "PR: [GitHub Repo](" + github_repo + ")")
-# lessons = group.month(group_name)
-# print(formatting.grouped_by_date(lessons))
+lessons = group.month(group_name)
+print(formatting.grouped_by_date(lessons))
 
 
 

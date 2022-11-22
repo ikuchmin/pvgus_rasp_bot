@@ -13,7 +13,7 @@ def grouped_by_date(lessons):
 
     message = ""
     for (d, ls) in lessons_by_date:
-        message += '*' + d.strftime("%d.%m.%Y") + '*\n' + '\n'.join(__lesson_without_date(l) for l in ls) + '\n\n'
+        message += '*' + d.strftime("%d.%m.%Y (%A)") + '*\n' + '\n'.join(__lesson_without_date(l) for l in ls) + '\n\n'
 
     return message or empty_lessons
 
