@@ -45,8 +45,16 @@ print('/now - занятие сейчас\n'
       '/month_all - расписание на текущий месяц (включая прошедшие)\n'
       '/two_month_all - расписание на текущий месяц\n\n'
       "PR: [GitHub Repo](" + github_repo + ")")
-lessons = group.month(group_name)
+lessons = group.month(group_name, only_future=False)
 print(formatting.grouped_by_date(lessons))
 
+from tinydb import TinyDB, Query
+
+db = TinyDB('tmp/test_db.json')
+db.insert({'int': 1, 'char': 'a'})
+db.insert({'int': 2, 'char': 'a'})
+
+
+datetime.utcfromtimestamp().replace(tzinfo=pytz.UTC)
 
 

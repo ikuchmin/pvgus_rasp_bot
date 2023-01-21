@@ -13,15 +13,59 @@ from common.github import github_repo
 from rasp import formatting as rasp_f
 from rasp import group as rasp_group
 from tg_bot.token import tg_tokens
+import tg_bot.utils as tg_utils
+from tg_bot.types import TgGroupChatSpec
 
 curr_datetime = datetime.now()
 group_name = ""
+discipline_name = ""
 
 def start(update: Update, context: CallbackContext):
     context.bot.send_message(chat_id=update.effective_chat.id,
                              text="Я бот расписания для группы " + group_name + ", вызови /help чтобы узнать список команд.\n"
                                   "PR: " + github_repo,
                              parse_mode=telegram.ParseMode.MARKDOWN)
+
+
+def register_group(update: Update, context: CallbackContext):
+    if len(context.args) == 0:
+        context.bot.send_message(chat_id=update.effective_chat.id,
+                                 text="Введите название группы, например: /register_group БОЗИоз22")
+        return
+
+    group_name = context.args[0]
+    group_spec = TgGroupChatSpec(group_name)
+
+    context.bot.send_message(chat_id=update.effective_chat.id,
+                             text="Название группы: " + group_name)
+
+
+def register_group_discipline(update: Update, context: CallbackContext):
+    if len(context.args) == 0:
+        context.bot.send_message(chat_id=update.effective_chat.id,
+                                 text="Введите название группы и дисциплины, например: /register_group_discipline БОЗИоз22 Алгоритмы и структуры данных")
+        return
+
+    group_name = context.args[0]
+    discipline_name = " ".join(context.args[1:])
+
+    context.bot.send_message(chat_id=update.effective_chat.id,
+                             text="Название группы: " + group_name + "\n"
+                             "Название дисциплины: " + discipline_name)
+
+
+
+def register_teacher(update: Update, context: CallbackContext):
+    if len(context.args) == 0:
+        context.bot.send_message(chat_id=update.effective_chat.id,
+                                 text="Введите фамилию и инициалы преподавателя, "
+                                      "например: /register_teacher Иванов И.И.")
+
+    teacher_name = " ".join(context.args[:])
+
+    context.bot.send_message(chat_id=update.effective_chat.id,
+                             text="Имя преподавателя: " + teacher_name)
+
 
 
 def now(update: Update, context: CallbackContext):
@@ -106,7 +150,11 @@ def help(update: Update, context: CallbackContext):
                                   '/two_month - расписание на два месяца\n'
                                   '/week_all - расписание на текущую неделю (включая прошедшие)\n'
                                   '/month_all - расписание на текущий месяц (включая прошедшие)\n'
-                                  '/two_month_all - расписание на два месяца (включая прошедшие)\n\n'
+                                  '/two_month_all - расписание на два месяца (включая прошедшие)\n'
+                                  '/register_group - зарегистрировать чат группы\n'
+                                  '/register_teacher - зарегистрировать чат преподавателя\n'
+                                  '/register_group_discipline - зарегистрировать чат дисциплины группы\n'
+                                  '\n'
                                   "PR: " + github_repo)
 
 
@@ -120,6 +168,9 @@ def handler(event, context):
 
     # register group bot commands
     for (command, handler) in [('start', start),
+                               ('register_group', register_group),
+                               ('register_teacher', register_teacher),
+                               ('register_group_discipline', register_group_discipline),
                                ('now', today),
                                ('today', today),
                                ('tomorrow', tomorrow),
@@ -134,6 +185,13 @@ def handler(event, context):
         dispatcher.add_handler(h)
 
     tg_body = json.loads(event["body"])
+
+    print(tg_body)
+
+    if 'edited_message' in tg_body:
+        return {
+            'statusCode': 200,
+        }
 
     global curr_datetime
     curr_datetime = datetime.utcfromtimestamp(tg_body["message"]["date"]).replace(tzinfo=pytz.UTC)

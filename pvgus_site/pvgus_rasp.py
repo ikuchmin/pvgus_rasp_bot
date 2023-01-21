@@ -7,6 +7,8 @@ from pvgus_sdo import pvgus_sdo
 from requests_html import HTMLSession
 
 pvgus_rasp_url = 'https://www.tolgas.ru/services/raspisanie/'
+pvgus_rasp_teacher_url = 'https://www.tolgas.ru/services/raspisanie/?id=1'
+
 pvgus_rasp_date_format = "%d.%m.%Y"
 
 session = HTMLSession()
