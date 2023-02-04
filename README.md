@@ -5,6 +5,14 @@ Here is Telegram Bot for pretty accessing PVGUS Student Scheduling (Telegram Bot
 Bot is running in Yandex Cloud and redy to run as stateless function 
 
 
+## Register bot for a student group chat
+
+Restrictions:
+- only users with admin rights can register/unregister bot
+
+1. Add bot to group chat
+2. Send `/register_group <groupName>` command to bot
+
 TODO
 
 * ~~Сделать по умолчанию отображение только занятий которые идут сейчас и будущих~~

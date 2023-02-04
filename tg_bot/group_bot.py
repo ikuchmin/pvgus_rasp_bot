@@ -10,6 +10,8 @@ from telegram.ext import CallbackContext, CommandHandler
 from telegram.ext import Dispatcher
 
 from common.github import github_repo
+from common.types import GroupChat
+
 from rasp import formatting as rasp_f
 from rasp import group as rasp_group
 from tg_bot.token import tg_tokens
@@ -34,7 +36,9 @@ def register_group(update: Update, context: CallbackContext):
         return
 
     group_name = context.args[0]
-    group_spec = TgGroupChatSpec(group_name)
+    group_spec = GroupChat(group_name)
+
+
 
     context.bot.send_message(chat_id=update.effective_chat.id,
                              text="Название группы: " + group_name)
