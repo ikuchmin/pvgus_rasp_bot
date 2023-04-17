@@ -17,9 +17,25 @@ TODO
 
 * ~~Сделать по умолчанию отображение только занятий которые идут сейчас и будущих~~
 * ~~Сделать суффикс к командам _all чтобы видеть и прошлые занятия~~
-* Реализовать возможность регистрации чатов с помощью бота и ключа
+* Add handling of case when user is not register chat for the group (now it just crashes)
+* ~~Реализовать возможность регистрации чатов с помощью бота и ключа~~
 * Реализовать возможность регистрации ссылок на SDO
 * Подумать над deadline
 * Добавить возможность посмотреть расписание на след неделю
 * Нотификация с утра предупреждающая о занятиях сегодня
 * Нотификация предупреждающая о начале занятий за 15 минут (required storage or just run before each pair of classes?)
+
+
+## Create table
+
+CREATE TABLE `chat`
+(
+`id` INT32 NOT NULL,
+`disciplineName` String,
+`groupName` String,
+`teacherName` String,
+`type` String,
+`registerReq` Json,
+
+    PRIMARY KEY (`id`)
+);
